@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">My Lists</string>
+    <string name="to_do_lists">My lists:</string>
+    <string name="completed_tasks">Completed Tasks:</string>
+    <string name="plus_new">+ New</string>
+    <string name="new_task">New Task</string>
+    <string name="create">Create</string>
+    <string name="task">Task:</string>
+    <string name="due_date">Due date:</string>
+    <string name="tag">New tag:</string>
+    <string name="add_item">Add Item</string>
+    <string name="clear">clear</string>
+    <string name="tutorial">Tutorial</string>
+</resources>
