@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView TagsListView;
     private ListView CompletedListView;
 
+    //refresh the activity so that new tasks are displayed after being made.
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -49,25 +50,26 @@ public class MainActivity extends AppCompatActivity {
         TagsListView = (ListView) findViewById(R.id.tags_list);
         TagsListView.setOnItemClickListener((adapterView, view, i, l) -> TaskScreen(String.valueOf(adapterView.getItemAtPosition(i))));
         mDatabaseHelper = new DatabaseHelper(this);
-        populateListView(0);
+        populateListView(0); //populate the listview with uncompleted tasks' tags
 
         CompletedListView = (ListView) findViewById(R.id.completed_tasks);
-        populateListView(1);
+        populateListView(1); //populate the listview with completed tasks
 
         Button new_task_button = findViewById(R.id.new_task_button);
-        new_task_button.setOnClickListener(view -> NewTask());
+        new_task_button.setOnClickListener(view -> NewTask()); //open new task screen when new task button is tapped
 
         Button tutorial_button = findViewById(R.id.tutorial_button);
-        tutorial_button.setOnClickListener(view -> TutorialScreen());
+        tutorial_button.setOnClickListener(view -> TutorialScreen()); //open tutorial screen when tutorial button is tapped
 
         Button clear_tasks_button = findViewById(R.id.clear_tasks_button);
         clear_tasks_button.setOnClickListener(view -> {
-            mDatabaseHelper.clearCompletedTasks();
-            onRestart();
+            mDatabaseHelper.clearCompletedTasks(); //clear completed tasks
+            onRestart(); //refresh the page
         });
 
     }
 
+    //captures a left swipe on the main screen to open the tutorial
     public boolean onTouchEvent(MotionEvent touchevent) {
         switch (touchevent.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    //used to populate the two list views on the main screen
     private void populateListView(int complete) {
         Cursor data = null;
         if (complete == 0) {
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> listData = new ArrayList<>();
         while (data.moveToNext()) {
             if (complete == 0) {
+                //check if tag is already in the ArrayList. If it is not, then add it.
                 if (!listData.contains(data.getString(2))) {
                     listData.add(data.getString(2));
                 }
@@ -109,16 +113,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //open new task page
     private void NewTask() {
         Intent new_task_activity_intent = new Intent(this, NewTaskActivity.class);
         startActivity(new_task_activity_intent);
     }
 
+    //open tutorial screen
     private void TutorialScreen() {
         Intent tutorial_activity_intent = new Intent(this, TutorialActivity.class);
         startActivity(tutorial_activity_intent);
     }
 
+    //open task screen
     private void TaskScreen(String Tag) {
         Intent task_screen_activity_intent = new Intent(this, TaskScreenActivity.class);
         task_screen_activity_intent.putExtra("Tag", Tag);

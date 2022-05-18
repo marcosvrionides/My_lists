@@ -24,6 +24,8 @@ public class ReminderBroadcast extends BroadcastReceiver {
 
         if (Build.VERSION.SDK_INT >= 21) builder.setVibrate(new long[0]);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify((int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE), builder.build());
+        int id;
+        id = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE); //generate a random id everytime a notification is made so that it doesn't override the previous ones
+        notificationManager.notify(id, builder.build());
     }
 }
