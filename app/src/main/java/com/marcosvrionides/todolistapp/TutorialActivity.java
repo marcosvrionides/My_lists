@@ -1,4 +1,4 @@
-package com.example.todolistapp;
+package com.marcosvrionides.todolistapp;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;

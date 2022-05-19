@@ -1,4 +1,4 @@
-package com.example.todolistapp;
+package com.marcosvrionides.todolistapp;
 
 import static org.junit.Assert.assertEquals;
 

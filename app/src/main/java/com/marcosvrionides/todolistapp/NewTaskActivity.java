@@ -1,4 +1,4 @@
-package com.example.todolistapp;
+package com.marcosvrionides.todolistapp;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
